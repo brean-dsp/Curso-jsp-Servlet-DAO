@@ -42,7 +42,7 @@
 					<tr>
 						<td>Valor R$:</td>
 						<td><input type="text" id="valor" name="valor" data-thousands="." data-decimal="," data-precision="2" 
-							value="${produto.valor}" maxlength="20"></td>
+							value="${produto.valorEmTexto}" maxlength="20"></td>
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar" style="width: 84px">
