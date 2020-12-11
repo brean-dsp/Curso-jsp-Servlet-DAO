@@ -1,5 +1,6 @@
 package servlet;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -176,6 +177,11 @@ public class Usuario extends HttpServlet {
 							
 							/*Pega o tipo da imagem*/
 							int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB: bufferedImage.getType();
+							
+							/*cria a miniatura da imagem*/
+							BufferedImage resizedImage = new BufferedImage(100, 100, type);
+							Graphics2D g = resizedImage.createGraphics();
+							g.drawImage(resizedImage, 0, 0, 100, 100, null);
 							
 							/*fim miniatura imagem*/
 						}else {
