@@ -174,6 +174,9 @@ public class Usuario extends HttpServlet {
 							/*transforma em um bufferedImage*/
 							BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
 							
+							/*Pega o tipo da imagem*/
+							int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB: bufferedImage.getType();
+							
 							/*fim miniatura imagem*/
 						}else {
 							usuario.setFotoBase64(request.getParameter("fotoTemp"));
