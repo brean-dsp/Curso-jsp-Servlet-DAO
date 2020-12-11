@@ -1,11 +1,13 @@
 package servlet;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -158,11 +160,21 @@ public class Usuario extends HttpServlet {
 						
 						
 						if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
+							
+							byte[] bytesImagem = converteStremParabyte(imagemFoto.getInputStream());
+							
 							String fotoBase64 = new Base64()
-							.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
+							.encodeBase64String(bytesImagem);
 							
 							usuario.setFotoBase64(fotoBase64);
 							usuario.setContentType(imagemFoto.getContentType());
+							
+							/*início miniatura imagem*/
+							
+							/*transforma em um bufferedImage*/
+							BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
+							
+							/*fim miniatura imagem*/
 						}else {
 							usuario.setFotoBase64(request.getParameter("fotoTemp"));
 							usuario.setContentType(request.getParameter("contetTypeTemp"));
