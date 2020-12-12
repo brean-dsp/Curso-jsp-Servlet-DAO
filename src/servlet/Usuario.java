@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -182,6 +183,12 @@ public class Usuario extends HttpServlet {
 							BufferedImage resizedImage = new BufferedImage(100, 100, type);
 							Graphics2D g = resizedImage.createGraphics();
 							g.drawImage(resizedImage, 0, 0, 100, 100, null);
+							
+							/*Escrevendo a imagem novamente*/
+							ByteArrayOutputStream baos = new ByteArrayOutputStream();
+							ImageIO.write(resizedImage, "png", baos);
+							
+							String miniaturaBase64 = "data:image/png;Base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
 							
 							/*fim miniatura imagem*/
 						}else {
